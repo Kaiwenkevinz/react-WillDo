@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import InputMenu from '../InputMenu/index';
+import ItemList from '../ItemList/index'
 
 class Main extends Component {
   constructor(props) {
@@ -8,60 +9,95 @@ class Main extends Component {
       items: [],
       currentItem: {
         text: '',
-        tag: '',
+        tag: '4',
         key: '',
       }
     }
   }
 
-  // input field onChange listener
+  // inputField onChange listener
   handleOnChange = (e) => {
-    const currentItem = {
-      text: e.target.value,
-      tag: 'z',
-      key: Date.now()
-    }
-    this.setState({
-      currentItem
-    })
+    let currentItem = this.state.currentItem
+    currentItem.text = e.target.value
+    currentItem.key = Date.now()
+
+    this.setState({ currentItem })
   }
 
-  // Catagory Dropup Menu listener
+  // SelectMenu listener
   onChangeSelect = (e) => {
-    console.log(e.target.value)
+    const tag = e.target.value
+    let newItem = this.state.currentItem
+    newItem.tag = tag
+
+    this.setState({ newItem })
   }
 
-  // Add Task button listener
+  // AddTask button listener
   handleAddItem = (e) => {
     e.preventDefault()
-
+    if (this.state.currentItem.text === '') {
+      return
+    }
     // update items
     const items = this.state.items
     items.push(this.state.currentItem)
-    this.setState({
-      items
-    })
+
+    this.setState({ items })
 
     // empty current item
     let currentItem = this.state.currentItem
+    const tag = currentItem.tag
     currentItem = {
       text: '',
+      tag: tag
     }
-    this.setState({
-      currentItem
-    })
 
-    console.log(this.state.items)
+    this.setState({ currentItem })
+  }
+
+  handleDeleteItem = (key) => {
+    let items = this.state.items.filter(item => item.key !== key)
+    this.setState({ items })
   }
 
   render() {
+    const redItems = this.state.items.filter(item => item.tag === '4')
+    const greenItems = this.state.items.filter(item => item.tag === '3')
+    const purpleItems = this.state.items.filter(item => item.tag === '2')
+    const blueItems = this.state.items.filter(item => item.tag === '1')
+
+
     return(
       <div className="App">
 
-        <div id="sectionRed"></div>
-        <div id="sectionGreen"></div>
-        <div id="sectionPurple"></div>
-        <div id="sectionBlue"></div>
+        <div id="sectionRed">
+          <ItemList
+            entries={redItems}
+            handleDeleteItem={this.handleDeleteItem}
+           />
+        </div>
+
+        <div id="sectionGreen">
+          <ItemList
+            entries={greenItems}
+            handleDeleteItem={this.handleDeleteItem}
+           />
+        </div>
+
+        <div id="sectionPurple">
+          <ItemList
+            entries={purpleItems}
+            handleDeleteItem={this.handleDeleteItem}
+           />
+        </div>
+
+        <div id="sectionBlue">
+          <ItemList
+            entries={blueItems}
+            handleDeleteItem={this.handleDeleteItem}
+           />
+        </div>
 
           <InputMenu
             handleOnChange={this.handleOnChange}
