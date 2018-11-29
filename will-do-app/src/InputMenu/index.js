@@ -8,22 +8,22 @@ class InputMenu extends Component {
       <div className="inputMenu">
         <form onSubmit={this.props.handleAddItem}>
           <input
+            id="input"
             placeholder="Tasks"
             value={this.props.currentItem.text}
             onChange={this.props.handleOnChange}
           />
 
-          {/* <div className="dropup">
-            <button className="dropbtn">Catagory</button>
-            <div className="dropup-content">
-              <a id="red">Urgent and important</a>
-              <a href="#">Important but not urgent</a>
-              <a href="#">Urgent but not important</a>
-              <a href="#">Other</a>
-            </div>
-          </div> */}
+          <div className="select-style">
+            <select onChange={this.props.onChangeSelect}>
+              <option value="4">****</option>
+              <option value="3">***</option>
+              <option value="2">**</option>
+              <option value="1">*</option>
+            </select>
+          </div>
 
-          <button type="submit">Add Task</button>
+          <button id="submitButton" type="submit">Add Task</button>
         </form>
       </div>
     )

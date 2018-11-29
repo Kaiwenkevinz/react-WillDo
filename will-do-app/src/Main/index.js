@@ -27,10 +27,9 @@ class Main extends Component {
   }
 
   // Catagory Dropup Menu listener
-  handleDropUpMenu = (e) => {
-    console.log()
+  onChangeSelect = (e) => {
+    console.log(e.target.value)
   }
-
 
   // Add Task button listener
   handleAddItem = (e) => {
@@ -68,6 +67,7 @@ class Main extends Component {
             handleOnChange={this.handleOnChange}
             handleAddItem={this.handleAddItem}
             currentItem={this.state.currentItem}
+            onChangeSelect={this.onChangeSelect}
           />
 
       </div>
