@@ -1,12 +1,16 @@
+::-webkit-scrollbar {
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
 
 .todoList {
-  overflow:hidden; overflow-y:scroll;
+  overflow-y:scroll;
   height:90%; width:90%;
 }
 .todoList li {
   color: #333;
   background-color: rgba(255, 255, 255, .5);
-  width: 95%; 
+  width: 95%;
   text-align: center;
   padding: 10px;
   margin-bottom: 5px;

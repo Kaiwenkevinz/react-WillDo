@@ -19,7 +19,9 @@ class ItemList extends Component {
   }
 
   render() {
-    return <ul className="todoList">{this.props.entries.map(this.createRow)}</ul>
+    return (
+        <ul className="todoList">{this.props.entries.map(this.createRow)}</ul>
+    )
   }
 }
 
