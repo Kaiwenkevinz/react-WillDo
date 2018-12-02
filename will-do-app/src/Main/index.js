@@ -5,6 +5,7 @@ import ItemList from '../ItemList/index'
 class Main extends Component {
   constructor(props) {
     super(props)
+
     this.state = {
       items: [],
       currentItem: {
@@ -14,6 +15,28 @@ class Main extends Component {
       }
     }
   }
+
+  componentDidMount() {
+
+    // fetch data from local storage
+    if (localStorage.hasOwnProperty("items")) {
+      const itemsInJson = localStorage.getItem("items")
+      const items = JSON.parse(itemsInJson)
+      this.setState({
+        "items": items
+      })
+    }
+
+    window.addEventListener(
+      "beforeunload",
+      this.saveToLocalStorage.bind(this)
+    );
+  }
+
+  saveToLocalStorage() {
+    localStorage.setItem("items", JSON.stringify(this.state.items));
+  }
+
 
   // inputField onChange listener
   handleOnChange = (e) => {
