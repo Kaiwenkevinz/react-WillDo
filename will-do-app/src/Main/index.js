@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import InputMenu from '../InputMenu/index';
-import ItemList from '../ItemList/index'
+import ItemList from '../ItemList/index';
+import firebase from '../fireBase';
+
 
 class Main extends Component {
   constructor(props) {
@@ -11,31 +13,44 @@ class Main extends Component {
       currentItem: {
         text: '',
         tag: '4',
-        key: '',
+        id: '',
       }
     }
   }
 
   componentDidMount() {
 
-    // fetch data from local storage
-    if (localStorage.hasOwnProperty("items")) {
-      const itemsInJson = localStorage.getItem("items")
-      const items = JSON.parse(itemsInJson)
+    let todoRef = firebase.database().ref('items').orderByKey();
+    todoRef.on('child_added', snapshot => {
+      let item = snapshot.val()
+      item.id = snapshot.key
+      console.log(item.id)
       this.setState({
-        "items": items
+        items: [item].concat(this.state.items)
       })
-    }
-
-    window.addEventListener(
-      "beforeunload",
-      this.saveToLocalStorage.bind(this)
-    );
+    })
   }
 
-  saveToLocalStorage() {
-    localStorage.setItem("items", JSON.stringify(this.state.items));
-  }
+  // componentDidMount() {
+  //
+  //   // fetch data from local storage
+  //   if (localStorage.hasOwnProperty("items")) {
+  //     const itemsInJson = localStorage.getItem("items")
+  //     const items = JSON.parse(itemsInJson)
+  //     this.setState({
+  //       "items": items
+  //     })
+  //   }
+  //
+  //   window.addEventListener(
+  //     "beforeunload",
+  //     this.saveToLocalStorage.bind(this)
+  //   );
+  // }
+  //
+  // saveToLocalStorage() {
+  //   localStorage.setItem("items", JSON.stringify(this.state.items));
+  // }
 
 
   // inputField onChange listener
@@ -66,6 +81,9 @@ class Main extends Component {
     const items = this.state.items
     items.push(this.state.currentItem)
 
+    /* Send data to Firebase */
+    firebase.database().ref('items').push( this.state.currentItem );
+
     this.setState({ items })
 
     // empty current item
@@ -79,9 +97,14 @@ class Main extends Component {
     this.setState({ currentItem })
   }
 
-  handleDeleteItem = (key) => {
-    let items = this.state.items.filter(item => item.key !== key)
+  handleDeleteItem = (id) => {
+    let items = this.state.items.filter(item => item.id !== id)
+    console.log(id)
+    console.log('rannnnnnnn')
+    const itemRef= firebase.database().ref(`/items/${id}`)
+    itemRef.remove()
     this.setState({ items })
+
   }
 
   render() {

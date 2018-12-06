@@ -11,14 +11,14 @@ class ItemList extends Component {
     return (
       <li
       key={item.key}
-      onClick={() => this.props.handleDeleteItem(item.key)}
+      onClick={() => this.props.handleDeleteItem(item.id)}
       >
         {item.text}
       </li>
     )
   }
 
-  
+
   render() {
     return (
         <ul className="todoList">{this.props.entries.map(this.createRow)}</ul>
