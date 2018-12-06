@@ -11,7 +11,7 @@ class ItemList extends Component {
     return (
       <li
       key={item.key}
-      onClick={() => this.props.handleDeleteItem(item.id)}
+      onClick={() => this.props.handleDeleteItem(item)}
       >
         {item.text}
       </li>
