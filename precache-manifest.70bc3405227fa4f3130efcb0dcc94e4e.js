@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/react-WillDo/static/js/runtime~main.1bb3dabe.js"
   },
   {
-    "revision": "12c06ecc46484413eaf0",
-    "url": "/react-WillDo/static/js/main.12c06ecc.chunk.js"
+    "revision": "deb961a791d733cd192d",
+    "url": "/react-WillDo/static/js/main.deb961a7.chunk.js"
   },
   {
     "revision": "a282657908a8dc48b01f",
     "url": "/react-WillDo/static/js/1.a2826579.chunk.js"
   },
   {
-    "revision": "12c06ecc46484413eaf0",
+    "revision": "deb961a791d733cd192d",
     "url": "/react-WillDo/static/css/main.d6670bc5.chunk.css"
   },
   {
-    "revision": "3429e8309956c78531ea178c7fa6750d",
+    "revision": "bbc9db45a1fb79e33b9a4c32945084df",
     "url": "/react-WillDo/index.html"
   }
 ];
