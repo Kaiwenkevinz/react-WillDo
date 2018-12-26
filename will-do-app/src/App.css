@@ -1,1 +1,36 @@
 
+#sectionRed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 50%;
+  background:#E2AFB4;
+}
+
+#sectionGreen {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 50%;
+  background:#D2E0B6;
+}
+
+#sectionPurple {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  height: 50%;
+  background:#A89AC2;
+}
+
+#sectionBlue {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 50%;
+  height: 50%;
+  background:#85ABE1;
+}
